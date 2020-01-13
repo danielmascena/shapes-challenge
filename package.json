@@ -1,0 +1,23 @@
+{
+  "name": "shapes-challenge",
+  "description": "",
+  "version": "0.0.9",
+  "keywords": [],
+  "dependencies": {
+    "@testing-library/react": "9.4.0",
+    "dialog-polyfill": "0.5.0",
+    "konva": "4.1.1",
+    "react": "16.10.1",
+    "react-dom": "16.10.1",
+    "react-konva": "16.10.1-0"
+  },
+  "devDependencies": {
+    "react-scripts": "2.0.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

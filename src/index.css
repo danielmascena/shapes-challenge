@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+header {
+  margin-top: -1.4rem;
+  height: 100%;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 4px #000;
+}
+
+.konvajs-content {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+footer {
+  text-align: center;
+  background: linear-gradient(45deg, red, blue);
+  line-height: 100px;
+  color: whitesmoke;
+  text-shadow: 1px 1px 4px #000;
+}

@@ -1,0 +1,26 @@
+.coordinates-container {
+  background: linear-gradient(blue, red, yellow);
+  padding: 0.2rem;
+  border-radius: 5px;
+  margin: 0 3rem 2rem;
+  box-shadow: 0 0 5px;
+}
+h3 {
+  margin: 0.4rem;
+  color: white;
+}
+.coordinates-content {
+  margin: 0;
+  color: green;
+  padding: 1rem;
+  text-shadow: 0 0 2px #fff, 0 0 1px greenyellow;
+  background: #000;
+  border-radius: 5px;
+}
+ul {
+  list-style-type: none;
+  display: inline-block;
+}
+ul:last-child {
+  vertical-align: top;
+}
