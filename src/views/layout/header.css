@@ -1,11 +1,11 @@
-.brand-modal,
+.modal-heading__text,
 .brand-title__text {
   text-shadow: 0 0 2px blue, 0 0 2px red;
   position: relative;
   display: inline-block;
 }
-.brand-modal:after,
-.brand-modal:before,
+.modal-heading__text:after,
+.modal-heading__text:before,
 .brand-title__text:after,
 .brand-title__text:before {
   content: "";
@@ -15,14 +15,14 @@
   border: 2px solid;
   box-shadow: 0 0 3px, 1px 1px 5px;
 }
-.brand-modal:before,
+.modal-heading__text:before,
 .brand-title__text:before {
   color: blue;
   right: 0;
   bottom: -15px;
   transform: skewX(30deg);
 }
-.brand-modal:after,
+.modal-heading__text:after,
 .brand-title__text:after {
   color: yellow;
   border-radius: 50%;
@@ -35,25 +35,20 @@
   min-width: 50%;
   min-height: 50%;
 }
-dialog + .backdrop, /* polyfill */
-dialog::backdrop {
-  /* native */
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+
+.modal-heading {
+  float: right;
+  margin: 2rem;
 }
-.brand-modal {
+.modal-heading__text {
   padding: 10%;
   text-align: center;
 }
-.brand-modal:after,
-.brand-modal:before {
+.modal-heading__text:after,
+.modal-heading__text:before {
   animation: animate-shapes 4s ease-in infinite;
 }
-.brand-modal:after {
+.modal-heading__text:after {
   animation-delay: 1.5s;
 }
 @keyframes animate-shapes {
