@@ -2,7 +2,7 @@ import React from "react";
 import Konva from "konva";
 import { Stage, Layer, Text, Circle, Line } from "react-konva";
 
-class Parallelogram extends React.Component {
+class DrawParallelogram extends React.Component {
   state = {
     count: 0,
     points: [],
@@ -201,4 +201,4 @@ class Parallelogram extends React.Component {
   }
 }
 
-export default Parallelogram;
+export default DrawParallelogram;

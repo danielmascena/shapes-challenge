@@ -1,7 +1,7 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import dialogPolyfill from "dialog-polyfill";
-import Header from "./header";
-import Footer from "./footer";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   const modalRef = useRef(null);
@@ -10,16 +10,18 @@ const Layout = ({ children }) => {
     dialogPolyfill.registerDialog(modalRef.current);
   }, []);
   return (
-    <>
-      <Header {...{modalRef}} />
+    <React.Fragment>
+      <Header {...{ modalRef }} />
       {children}
       <dialog id="about" ref={modalRef}>
-        <h3 className="modal-heading"><span className="modal-heading__text">Shapes</span></h3>
+        <h3 className="modal-heading">
+          <span className="modal-heading__text">Shapes</span>
+        </h3>
         <p>lorem</p>
-        <button onClick={()=>modalRef.current.close()}>Close</button>
+        <button onClick={() => modalRef.current.close()}>Close</button>
       </dialog>
       <Footer />
-    </>
+    </React.Fragment>
   );
 };
 

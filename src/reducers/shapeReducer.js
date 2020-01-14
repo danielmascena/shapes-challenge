@@ -17,14 +17,17 @@ const reducer = (state, {
     case types.CALCULATE_DIFFERENCES_BETWEEN_POINTS:
       return;
     case types.ADDING_POINT:
-      return {
-        ...state,
-        pointsSet: [...state.pointsSet, payload.point]
-      }
-      case types.RESET_SHAPES:
-        return initialState;
-      default:
-        return state;
+      if (state.count < 4)
+        return {
+          ...state,
+          count: state.count + 1,
+          points: [...state.point, Object.values(payload.point)],
+          pointsSet: [...state.pointsSet, payload.point]
+        }
+    case types.RESET_SHAPES:
+      return initialState;
+    default:
+      return state;
   }
 };
 
