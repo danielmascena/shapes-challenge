@@ -1,28 +1,22 @@
-import React, { useEffect, useRef } from "react";
-import dialogPolyfill from "dialog-polyfill";
+import React from "react";
+
+import { connect } from "react-redux";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const Layout = ({ children }) => {
-  const modalRef = useRef(null);
-  useEffect(() => {
-    //var dialog = document.querySelector("dialog");
-    dialogPolyfill.registerDialog(modalRef.current);
-  }, []);
+const mapStateToProps = state => ({
+  count: state.count
+});
+let Layout = ({ children, count }) => {
   return (
     <React.Fragment>
-      <Header {...{ modalRef }} />
+      <Header />
       {children}
-      <dialog id="about" ref={modalRef}>
-        <h3 className="modal-heading">
-          <span className="modal-heading__text">Shapes</span>
-        </h3>
-        <p>lorem</p>
-        <button onClick={() => modalRef.current.close()}>Close</button>
-      </dialog>
       <Footer />
     </React.Fragment>
   );
 };
+
+Layout = connect(mapStateToProps)(Layout);
 
 export default Layout;

@@ -1,7 +1,3 @@
-import {
-    createContext
-} from "react";
+import React from "react";
 
-const ShapeContext = createContext();
-
-export default ShapeContext;
+export const ShapeContext = React.createContext();

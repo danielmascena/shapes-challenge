@@ -1,21 +1,22 @@
-import React, { useReducer } from "react";
+import React from "react";
 import Layout from "./views/layout/Layout";
-import DrawParallelogram from "./views/shapes/DrawParallelogram";
 import DisplayCoordirnates from "./views/shapes/DisplayCoordirnates";
-import reducer, { initialState } from "./reducers/shapeReducer";
-import ShapeContext from "./contexts/ShapeContext";
+import Container from "./views/shapes/Container";
+import DrawParallelogram from "./views/shapes/DrawParallelogram";
+import reducer from "./reducers/shapeReducer";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 
+export const store = createStore(reducer);
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <ShapeContext.Provider
-      value={{ shapeState: state, shapeDispatch: dispatch }}
-    >
+    <Provider store={store}>
       <Layout>
         <DisplayCoordirnates />
-        <DrawParallelogram />
+        <Container />
+        {/* <DrawParallelogram /> */}
       </Layout>
-    </ShapeContext.Provider>
+    </Provider>
   );
 };
 

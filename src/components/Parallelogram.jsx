@@ -1,14 +1,8 @@
 import React from "react";
+import { Line } from "react-konva";
+import Point from "../model/Point";
 
-const Parellelogram = () => {
-  return (
-    <Line
-      onClick={() => console.log("clicked")}
-      x={0}
-      y={0}
-      points={points}
-      closed
-      stroke="blue"
-    />
-  );
-};
+const Parallelogram = ({ linePoints, color = "blue", point = new Point() }) => (
+  <Line x={point.x} y={point.y} points={linePoints} closed stroke={color} />
+);
+export default Parallelogram;

@@ -1,5 +1,5 @@
 export default {
-    desenhaCircuferencia(p1, p2, p3, centro) {
+    desenhaCircuferencia(p1, p2, p3) {
         console.log("circuferencia", p1, p2, p3);
         const {
             a,
