@@ -1,21 +1,26 @@
 import React, { useEffect } from "react";
+import {connect} from "react-redux";
 import Konva from "konva";
 import { Circle } from "react-konva";
 
-const PointCircle = ({
-  point,
+const mapStateToProps = state => ({
+  pointsSet: state.pointsSet
+});
+let PointCircle = ({
+  point: {x,y},
   radius,
   draggable,
   fill,
   stroke,
-  key,
+  index,
   shadowBlur = 5,
   shadowOpacity = 0.5,
-  shadowColor = "black"
+  shadowColor = "black",
+  pointsSet
 }) => {
-  let circleProperties = { ...point, radius };
-  if (key !== undefined) {
-    circleProperties.key = key;
+  let circleProperties = { x, y, radius };
+  if (index !== undefined) {
+    circleProperties.key = index;
   }
   if (typeof fill === "string") {
     circleProperties.fill = fill;
@@ -36,6 +41,7 @@ const PointCircle = ({
     };
 
     const handleDragEnd = event => {
+      console.log("Drag event ended ", event, pointsSet);
       event.target.to({
         duration: 0.5,
         easing: Konva.Easings.ElasticEaseOut,
@@ -60,4 +66,5 @@ const PointCircle = ({
   return <Circle {...circleProperties} />;
 };
 
+PointCircle = connect(mapStateToProps)(PointCircle);
 export default PointCircle;

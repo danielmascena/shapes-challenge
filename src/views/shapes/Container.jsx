@@ -21,8 +21,7 @@ let Container = ({
   circleRadius
 }) => {
   const handleClick = event => {
-    const point = new Point(event.currentTarget.pointerPos);
-    dispatch(actionCreation.insertPoint(point));
+    dispatch(actionCreation.insertPoint(event.currentTarget.pointerPos));
   };
 
   useEffect(() => {

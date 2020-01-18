@@ -13,7 +13,7 @@ let DrawShapes = ({ points, pointsSet, circleCenter, circleRadius }) => {
         <PointCircle
           point={point}
           radius={11}
-          key={index}
+          index={index}
           draggable={true}
           fill="red"
         />

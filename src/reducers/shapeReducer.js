@@ -18,18 +18,26 @@ const reducer = (state = initialState, {
       return;
     case types.ADDING_POINT:
       if (state.count < 4) {
-        console.log("adding ", state.points.concat(Object.values(payload)));
+        const count = state.count + 1;
+        const point = new Point(payload.x, payload.y, count);
+        console.log("adding ", point);
         return {
           ...state,
-          count: state.count + 1,
+          count: count,
           points: state.points.concat(Object.values(payload)),
-          pointsSet: [...state.pointsSet, payload]
+          pointsSet: [...state.pointsSet, point]
         };
       }
-      case types.RESET_SHAPES:
-        return initialState;
-      default:
-        return state;
+      break;
+    case types.UPDATING_POINT:
+      
+    return {
+
+    };
+    case types.RESET_SHAPES:
+      return initialState;
+    default:
+      return state;
   }
 };
 
