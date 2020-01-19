@@ -23,15 +23,16 @@ const reducer = (state = initialState, {
         const neoPointSet = [...state.pointsSet, point];
        return {
           ...state,
-          count: count,
+          count,
           /** Avoid TypeError throwed by Object.values */
           points: neoPointSet.flatMap(point => point && [point.x, point.y]),
           pointsSet: neoPointSet
         };
+      } else {
+        return state;
       }
-      break;
+      
     case types.UPDATING_POINT:
-      console.log("Updating ", payload);
       const {pos:indexForUpdate, newPoint: pointForUpdate} = payload;
       const pointSetUpdated = [];
       const updatedCoord = [];
