@@ -1,31 +1,37 @@
 import React, { useEffect } from "react";
 import { Stage, Layer, Text } from "react-konva";
-import { connect } from "react-redux";
-import DrawShapes from "./DrawShapes";
+import reducer from "../../reducers/shapeReducer";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import DisplayCoordirnates from "./DisplayCoordirnates";
+import Parallelogram from "../../components/Parallelogram";
+import PointCircle from "../../components/PointCircle";
+
 import actionCreation from "../../actions/shapeAction";
+import Point from "../../model/Point";
 
-const mapStateToProps = state => ({
-  count: state.count,
-  points: state.points,
-  pointsSet: state.pointsSet,
-  circleCenter: state.circleCenter,
-  circleRadius: state.circleRadius
-});
-let Container = ({
-  dispatch,
-  count,
-  points,
-  pointsSet,
-  circleCenter,
-  circleRadius
-}) => {
+
+export const store = createStore(reducer);
+
+const Container = () => {
+  let {count, points, pointsSet, circleCenter, circleRadius, dispatch} = store.getState();
+
   const handleClick = event => {
-    dispatch(actionCreation.insertPoint(event.currentTarget.pointerPos));
+    store.dispatch(actionCreation.insertPoint(event.currentTarget.pointerPos));
   };
-
+  const select = state => state.pointsSet;
+  const handleChange = () => {
+    const previuosValue = pointsSet;
+    const currentValue = select(store.getState());
+    if (previuosValue !== currentValue) {
+      console.log("sub ", store.getState());
+      pointsSet = currentValue;
+    }
+  }
+  const unsubscribe = store.subscribe(handleChange);
   useEffect(() => {
-    console.log(points, pointsSet, circleCenter, circleRadius);
-  }, [points.length]);
+    console.log('hit');
+  }, pointsSet.length);
   /*
   const {innerHeight, innerWidth} = window;
   const [viewportWidth, setViewportWidth] = useState(innerWidth);
@@ -35,25 +41,46 @@ let Container = ({
     setViewportWidth(innerWidth);
   }, [innerHeight, innerWidth]);
   */
-  return (
-    <Stage
-      width={window.innerWidth}
-      height={window.innerHeight}
-      onClick={handleClick}
-    >
-      <Layer>
-        <Text
-          text={`Please choose ${4 - count} ${
-            count < 3 ? "points" : "point"
-          } to draw a parallelogram`}
-          fontSize={15}
-          fill="white"
-        />
-        <DrawShapes {...{ points, pointsSet, circleCenter, circleRadius, dispatch }} />
-      </Layer>
-    </Stage>
+  return ( 
+    <Provider store={store}>
+      <DisplayCoordirnates />
+      <Stage
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onClick={handleClick}
+      >
+        <Layer>
+          <Text
+            text={`Please choose ${ 4 - count} ${
+              count > 3 ? "points" : "point"
+            } to draw a parallelogram`}
+            fontSize={15}
+            fill="white"
+          />
+          
+          {pointsSet.map((point, index) => (
+            <PointCircle
+              point={point}
+              radius={11}
+              index={index}
+              draggable={true}
+              fill="red"
+            />
+          ))}
+          <Parallelogram linePoints={points} />
+
+          {circleCenter instanceof Point && (
+            <PointCircle
+              point={circleCenter}
+              radius={circleRadius}
+              stroke="yellow"
+            />
+          )}
+          
+        </Layer>
+      </Stage>
+    </Provider>
   );
 };
 
-Container = connect(mapStateToProps)(Container);
 export default Container;

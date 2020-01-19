@@ -15,7 +15,7 @@ let DisplayCoordinates = ({ pointsSet, circleRadius }) => {
       <div className="coordinates-content">
         <ul>
           {[...pointsSet, ...listOfPoints].map((point = new Point(), index) => (
-            <li>{`Point ${index + 1}: ${point.x} ${point.y}`}</li>
+            <li key={index}>{`Point ${index + 1}: ${point.x} ${point.y}`}</li>
           ))}
         </ul>
         <ul>
