@@ -3,7 +3,6 @@ import { Stage, Layer, Text } from "react-konva";
 import { connect } from "react-redux";
 import DrawShapes from "./DrawShapes";
 import actionCreation from "../../actions/shapeAction";
-import Point from "../../model/Point";
 
 const mapStateToProps = state => ({
   count: state.count,

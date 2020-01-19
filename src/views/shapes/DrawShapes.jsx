@@ -3,11 +3,15 @@ import Parallelogram from "../../components/Parallelogram";
 import PointCircle from "../../components/PointCircle";
 import Point from "../../model/Point";
 import actionCreation from "../../actions/shapeAction";
+import * as shapeUtils from "../../utils/shapeUtils";
 
 let DrawShapes = ({ points, pointsSet, circleCenter, circleRadius, dispatch }) => {
   useEffect(() => {
-    console.log("draw shapes ", points, pointsSet, circleCenter, circleRadius);
-  }, [pointsSet.length, points.length]);
+    if (pointsSet.length === 3) {
+      console.log("time to set the fourth point ", points, pointsSet, circleCenter, circleRadius);
+    }
+    console.log("draw shapes", circleCenter)
+  }, [pointsSet.length]);
   return (
     <React.Fragment>
       {pointsSet.map((point, index) => (
