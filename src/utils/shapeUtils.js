@@ -3,26 +3,23 @@ export function desenhaCircuferencia(p1, p2, p3) {
     const {
         a,
         b
-    } = this.expressaoReta(p1, p2);
-    const [ap, bp] = this.retaPerpendicular(a, b, p3.x, p3.y);
-    const [x, y] = this.intersecaoRetas({
+    } = expressaoReta(p1, p2);
+    const [ap, bp] = retaPerpendicular(a, b, p3.x, p3.y);
+    const [x, y] = intersecaoRetas({
         a,
         b
     }, {
         a: ap,
         b: bp
     });
-    const h = this.calcularDistanceEntrePontos(p3, {
+    const h = calcularDistanceEntrePontos(p3, {
         x,
         y
     });
-    const base = this.calcularDistanceEntrePontos(p1, p2);
+    const base = calcularDistanceEntrePontos(p1, p2);
     const area = h * base;
     const radius = Math.sqrt(area / Math.PI);
-    this.setState(state => ({
-        ...state,
-        radius
-    }));
+    return {area, radius};
 };
 
 export function calcularDistanceEntrePontos(p1, p2) {
@@ -43,8 +40,8 @@ export function intersecaoRetas(d1, d2) {
 
 export function expressaoReta(p1, p2) {
     console.log("p1 & p2", p1, p2);
-    const a = this.coeficiente(p1, p2);
-    const b = this.constanteFuncao(p1.x, p1.y, a);
+    const a = coeficiente(p1, p2);
+    const b = constanteFuncao(p1.x, p1.y, a);
     console.log("a & b", a, b);
     return {
         a,

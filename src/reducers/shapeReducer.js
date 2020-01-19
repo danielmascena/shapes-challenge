@@ -5,8 +5,9 @@ export const initialState = {
   count: 0,
   points: [],
   pointsSet: [],
-  circleCenter: {},
-  circleRadius: 0
+  circleCenter: new Point,
+  circleRadius: 0,
+  parallelogramArea: 0
 };
 
 const reducer = (state = initialState, {
@@ -31,7 +32,6 @@ const reducer = (state = initialState, {
       } else {
         return state;
       }
-      
     case types.UPDATING_POINT:
       const {pos:indexForUpdate, newPoint: pointForUpdate} = payload;
       const pointSetUpdated = [];
@@ -46,13 +46,24 @@ const reducer = (state = initialState, {
           pointSetUpdated.push(point);
         }
       }
-      
       return {
         ...state,
         points: updatedCoord,
         pointsSet: pointSetUpdated
       };
-    
+    case types.SET_CIRCLE_CENTER:
+      const point = new Point(payload.x, payload.y);
+      return {
+        ...state,
+        circleCenter: point
+      }
+    case types.SET_AREA_RADIUS:
+      const {area, radius} = payload;
+      return {
+        ...state,
+        circleRadius: radius,
+        parallelogramArea: area
+      }
     case types.RESET_SHAPES:
       return initialState;
     default:

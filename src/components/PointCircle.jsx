@@ -62,7 +62,6 @@ const PointCircle = ({
       onDragEnd: handleDragEnd
     };
   }
-  //console.log("Point Circle", circleProperties);
 
   return <Circle {...circleProperties} />;
 };
