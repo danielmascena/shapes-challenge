@@ -7,10 +7,10 @@ const actionCreation = {
             payload: {x, y}
         }
     },
-    updatePoint(point) {
+    updatePoint(pos, newPoint) {
         return {
             type: types.UPDATING_POINT,
-            payload: point
+            payload: {pos, newPoint}
         }
     }
 }

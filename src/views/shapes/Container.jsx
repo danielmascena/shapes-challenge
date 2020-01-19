@@ -50,7 +50,7 @@ let Container = ({
           fontSize={15}
           fill="white"
         />
-        <DrawShapes {...{ points, pointsSet, circleCenter, circleRadius }} />
+        <DrawShapes {...{ points, pointsSet, circleCenter, circleRadius, dispatch }} />
       </Layer>
     </Stage>
   );

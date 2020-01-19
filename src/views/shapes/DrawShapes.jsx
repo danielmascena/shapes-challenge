@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Parallelogram from "../../components/Parallelogram";
 import PointCircle from "../../components/PointCircle";
 import Point from "../../model/Point";
+import actionCreation from "../../actions/shapeAction";
 
-let DrawShapes = ({ points, pointsSet, circleCenter, circleRadius }) => {
+let DrawShapes = ({ points, pointsSet, circleCenter, circleRadius, dispatch }) => {
   useEffect(() => {
     console.log("draw shapes ", points, pointsSet, circleCenter, circleRadius);
   }, [pointsSet.length, points.length]);
@@ -16,6 +17,7 @@ let DrawShapes = ({ points, pointsSet, circleCenter, circleRadius }) => {
           index={index}
           draggable={true}
           fill="red"
+          updateCoords={point => dispatch.call(null, actionCreation.updatePoint(index, point))}
         />
       ))}
       <Parallelogram linePoints={points} />
