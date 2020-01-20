@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "../../components/Modal";
+import About from "../shapes/About";
 import "./header.css";
 
 const Header = ({ modalRef }) => {
@@ -20,8 +21,9 @@ const Header = ({ modalRef }) => {
           About
         </a>
       </nav>
-
-      <Modal defineModal={setModal} />
+      <aside>
+        <About defineModal={setModal} />
+      </aside>
     </header>
   );
 };

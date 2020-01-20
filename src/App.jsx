@@ -14,7 +14,6 @@ const App = () => {
       <Layout>
         <DisplayCoordirnates />
         <Container />
-        {/* <DrawParallelogram /> */}
       </Layout>
     </Provider>
   );
