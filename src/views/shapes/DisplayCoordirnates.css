@@ -13,9 +13,10 @@ h3 {
   margin: 0;
   color: green;
   padding: 1rem;
-  text-shadow: 0 0 2px #fff, 0 0 1px greenyellow;
+  text-shadow: 0 0 2px navy, 0 0 1px greenyellow;
   background: #000;
   border-radius: 5px;
+  letter-spacing: 3px;
 }
 ul {
   list-style-type: none;

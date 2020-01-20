@@ -16,12 +16,12 @@ let DisplayCoordinates = ({ pointsSet, circleRadius, parallelogramArea }) => {
       <div className="coordinates-content">
         <ul>
           {[...pointsSet, ...listOfPoints].map((point = new Point(), index) => (
-            <li key={index}>{`Point ${index + 1}: ${point.x} ${point.y}`}</li>
+            <li key={index}>{`Point ${index + 1}: ${point.x} ${parseInt(point.y, 10)}`}</li>
           ))}
         </ul>
         <ul>
-          <li>Parallelogram area: {parallelogramArea}</li>
-          <li>Circle radius: {circleRadius}</li>
+          <li>Parallelogram area: {parseInt(parallelogramArea, 10)}</li>
+          <li>Circle radius: {parseInt(circleRadius, 10)}</li>
         </ul>
       </div>
     </aside>

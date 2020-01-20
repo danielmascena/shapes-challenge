@@ -10,12 +10,6 @@ dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-#about {
-    background: #ccc;
-    min-width: 50%;
-    min-height: 50%;
-}
-
 .modal-heading {
     float: right;
     margin: 2rem;
