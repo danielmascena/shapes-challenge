@@ -11,12 +11,11 @@ dialog::backdrop {
 }
 
 .modal-heading {
-    float: right;
     margin: 2rem;
 }
 
 .modal-heading__text {
-    padding: 10%;
+    padding: 2%;
     text-align: center;
 }
 
@@ -27,6 +26,27 @@ dialog::backdrop {
 
 .modal-heading__text:after {
     animation-delay: 1.5s;
+}
+
+.modal-content {
+    background: wheat;
+    border-radius: 5px;
+    line-height: 2.5;
+    padding: 1rem;
+    margin: 3rem;
+    color: navy;
+    box-shadow: 0 0 23rem -3rem;
+    border: inset darkcyan 1rem;
+}
+
+.modal-btn__close {
+    background: yellow;
+    color: blue;
+}
+
+.modal-btn__close:hover {
+    background: blue;
+    color: yellow;
 }
 
 @keyframes animate-shapes {

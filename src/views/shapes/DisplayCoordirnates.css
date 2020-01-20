@@ -4,11 +4,15 @@
   border-radius: 5px;
   margin: 0 3rem 2rem;
   box-shadow: 0 0 5px;
+  max-width: 40%;
+  margin: 4rem auto;
 }
+
 h3 {
   margin: 0.4rem;
   color: white;
 }
+
 .coordinates-content {
   margin: 0;
   color: green;
@@ -18,10 +22,12 @@ h3 {
   border-radius: 5px;
   letter-spacing: 3px;
 }
+
 ul {
   list-style-type: none;
   display: inline-block;
 }
+
 ul:last-child {
   vertical-align: top;
 }

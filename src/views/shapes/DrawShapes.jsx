@@ -7,9 +7,7 @@ import {
   desenhaCircuferencia,
   coeficiente,
   constanteFuncao,
-  gerarQuartoPonto,
-  expressaoReta,
-  intersecaoRetas
+  gerarParallelogram
 } from "../../utils/shapeUtils";
 
 let DrawShapes = ({
@@ -44,20 +42,11 @@ let DrawShapes = ({
         if (pointsSet[2].y === result * pointsSet[2].x + termoConst) {
           alert("Ponto dentro da reta, clique novamente");
         } else {
-          // inferir o 4º ponto atraves da projeção das retas paralelas
-          const [x4, y4] = gerarQuartoPonto(pointsSet);
-          //console.log("quarto ponto", x4, y4);
-          const p4 = { x: x4, y: y4 };
+          const [p4, pontoIntersecao] = gerarParallelogram(pointsSet);
           dispatch(actionCreation.insertPoint(p4));
-          //encontrar o centro do paralelograma; cruzamento (interseção) das diagonais
-          // p1 -> p3 = diagonal 1
-          const d1 = expressaoReta(pointsSet[0], pointsSet[2]);
-          // p2 -> p4 = diagonal 2
-          const d2 = expressaoReta(pointsSet[1], p4);
-          // centro do paralelograma
-          const [x, y] = intersecaoRetas(d1, d2);
+
           //console.log("x & y", x, y);
-          dispatch(actionCreation.setCircleCenter({ x, y }));
+          dispatch(actionCreation.setCircleCenter(pontoIntersecao));
 
           const { area, radius } = desenhaCircuferencia(
             pointsSet[0],

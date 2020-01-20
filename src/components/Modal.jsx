@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, Children } from "react";
 import dialogPolyfill from "dialog-polyfill";
 import "./modal.css";
-const Modal = ({ title, defineModal }) => WrappedComponent => {
+const Modal = title => WrappedComponent => {
   return myprops => {
     const modalRef = useRef(null);
     console.log("wrapper ", myprops);
@@ -12,13 +12,19 @@ const Modal = ({ title, defineModal }) => WrappedComponent => {
     }, []);
     return (
       <dialog id="about" ref={modalRef}>
-        <h3 className="modal-heading">
+        <h2 className="modal-heading">
           <span className="modal-heading__text">{title}</span>
-        </h3>
+        </h2>
         <div className="modal-content">
           <WrappedComponent />
         </div>
-        <button onClick={() => modalRef.current.close()}>Close</button>
+        <button
+          type="button"
+          className="shapes-btn modal-btn__close"
+          onClick={() => modalRef.current.close()}
+        >
+          Close
+        </button>
       </dialog>
     );
   };

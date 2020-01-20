@@ -8,13 +8,16 @@ header {
   /* fallback */
   overflow: auto;
 }
+
 .brand-title {
   float: left;
 }
+
 nav {
   margin-top: 2rem;
   float: right;
 }
+
 nav a {
   cursor: pointer;
 }
@@ -50,6 +53,6 @@ nav a {
 .brand-title__text:after {
   color: yellow;
   border-radius: 50%;
-  left: -10px;
-  top: -10px;
+  left: 0px;
+  top: 0px;
 }

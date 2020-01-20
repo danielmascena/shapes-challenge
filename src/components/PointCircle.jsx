@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Konva from "konva";
 import { Circle } from "react-konva";
 import Point from "../model/Point";
 
 const PointCircle = ({
-  point: {x, y},
+  point: { x, y },
   radius,
   draggable,
   fill,
@@ -16,6 +16,7 @@ const PointCircle = ({
   pointsSet,
   updateCoords
 }) => {
+  const [previousCoord, setPreviousCoord] = useState();
   let circleProperties = { x, y, radius };
   if (index !== undefined) {
     circleProperties.key = index;
@@ -28,6 +29,8 @@ const PointCircle = ({
   }
   if (typeof draggable === "boolean" && draggable) {
     const handleDragStart = event => {
+      console.log("drag starting ", x, y);
+      setPreviousCoord({ x, y });
       event.target.setAttrs({
         shadowOffset: {
           x: 15,
@@ -39,7 +42,7 @@ const PointCircle = ({
     };
 
     const handleDragEnd = event => {
-      const {x:neoX, y:neoY} = event.target._lastPos;
+      const { x: neoX, y: neoY } = event.target._lastPos;
       const neoPoint = new Point(neoX, neoY);
       console.log("Drag event ended ", neoPoint, updateCoords);
       updateCoords(neoPoint);

@@ -12,10 +12,19 @@ body {
   background-color: #ddd;
 }
 
+.shapes-btn {
+  padding: 10px;
+  border: 1px solid;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: all 500ms ease-in;
+}
+
 #about {
   background: #ccc;
-  min-width: 50%;
+  max-width: 50%;
   min-height: 50%;
+  padding: 2rem;
 }
 
 .konvajs-content {
