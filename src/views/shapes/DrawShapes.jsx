@@ -4,8 +4,8 @@ import PointCircle from "../../components/PointCircle";
 import Point from "../../model/Point";
 import actionCreation from "../../actions/shapeAction";
 import {
-  desenhaCircuferencia,
-  gerarParallelogram
+  drawCircumference,
+  generateParallelogram
 } from "../../utils/shapeUtils";
 import { validateParallelogram } from "../../services/shapeService";
 
@@ -23,12 +23,12 @@ let DrawShapes = ({
       } catch (error) {
         alert(error.message);
       }
-      const [p4, pontoIntersecao] = gerarParallelogram(pointsSet);
+      const [p4, pontoIntersecao] = generateParallelogram(pointsSet);
       dispatch(actionCreation.insertPoint(p4));
 
       dispatch(actionCreation.setCircleCenter(pontoIntersecao));
 
-      const { area, radius } = desenhaCircuferencia(
+      const { area, radius } = drawCircumference(
         pointsSet[0],
         p4,
         pointsSet[1]

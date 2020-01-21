@@ -2,12 +2,11 @@ import {
     store as shapeStore
 } from "../App.jsx";
 import {
-    gerarParallelogram,
-    coeficiente,
-    constanteFuncao
+    generateParallelogram,
+    coefficient,
+    constantFunction
 } from "../utils/shapeUtils";
 import actionCreation from "../actions/shapeAction";
-import Point from "../model/Point.js";
 
 /**
  * 
@@ -26,11 +25,11 @@ export function updateParallelogram({
     const nextSiblingId = nextPointId - 1;
     const prevPoint = state.pointsSet[prevSiblingId];
     const nextPoint = state.pointsSet[nextSiblingId];
-    const [newPrevCoord, pontoPrevIntersecao] = gerarParallelogram([{
+    const [newPrevCoord, pontoPrevIntersecao] = generateParallelogram([{
         x,
         y
     }, point, prevPoint]);
-    const [newNextCoord, intersectionNextPoint] = gerarParallelogram([{
+    const [newNextCoord, intersectionNextPoint] = generateParallelogram([{
         x,
         y
     }, point, nextPoint]);
@@ -44,19 +43,19 @@ export function updateParallelogram({
 
 export function validateParallelogram(pointsSet) {
     const [p1, p2] = pointsSet;
-    let result = coeficiente(p1, p2);
+    let result = coefficient(p1, p2);
     if (result === null) {
         if (pointsSet[2].x === pointsSet[1].x) {
-            throw new Error("Ponto dentro da reta, clique novamente");
+            throw new Error("Point inside the line, click again");
         }
     } else {
-        const termoConst = constanteFuncao(
+        const termoConst = constantFunction(
             pointsSet[0].x,
             pointsSet[0].y,
             result
         );
         if (pointsSet[2].y === result * pointsSet[2].x + termoConst) {
-            throw new Error("Ponto dentro da reta, clique novamente");
+            throw new Error("Point inside the line, click again");
         }
     }
 }

@@ -3,7 +3,7 @@ import Modal from "../../components/Modal";
 import About from "../shapes/About";
 import "./header.css";
 
-const Header = ({ modalRef }) => {
+const Header = () => {
   const [modal, setModal] = React.useState(null);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Stage, Layer, Text } from "react-konva";
 import { connect } from "react-redux";
 import DrawShapes from "./DrawShapes";
@@ -23,9 +23,6 @@ let Container = ({
     dispatch(actionCreation.insertPoint(event.currentTarget.pointerPos));
   };
 
-  useEffect(() => {
-    console.log(points, pointsSet, circleCenter, circleRadius);
-  }, [points.length]);
   /*
   const {innerHeight, innerWidth} = window;
   const [viewportWidth, setViewportWidth] = useState(innerWidth);

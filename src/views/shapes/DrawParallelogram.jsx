@@ -17,14 +17,14 @@ class DrawParallelogram extends React.Component {
     //console.log("pointset", pointsSet);
     if (this.state.count === 3) {
       const [p1, p2] = this.state.pointsSet;
-      result = this.coeficiente(p1, p2);
+      result = this.coefficient(p1, p2);
       if (result === null) {
         if (pointsSet[2].x === pointsSet[1].x) {
           alert("Ponto dentro da reta, clique novamente");
           this.setState(prevState);
         }
       } else {
-        const termoConst = this.constanteFuncao(
+        const termoConst = this.constantFunction(
           pointsSet[0].x,
           pointsSet[0].y,
           result
@@ -34,74 +34,74 @@ class DrawParallelogram extends React.Component {
           this.setState(prevState);
         } else {
           // inferir o 4º ponto atraves da projeção das retas paralelas
-          const [x4, y4] = this.gerarQuartoPonto(pointsSet);
+          const [x4, y4] = this.generateFourthPoint(pointsSet);
           //console.log("quarto ponto", x4, y4);
           const p4 = { x: x4, y: y4 };
           this.setPoint(p4);
           //encontrar o centro do paralelograma; cruzamento (interseção) das diagonais
           // p1 -> p3 = diagonal 1
-          const d1 = this.expressaoReta(pointsSet[0], pointsSet[2]);
+          const d1 = this.straightExpression(pointsSet[0], pointsSet[2]);
           // p2 -> p4 = diagonal 2
-          const d2 = this.expressaoReta(pointsSet[1], p4);
+          const d2 = this.straightExpression(pointsSet[1], p4);
           // centro do paralelograma
-          const [x, y] = this.intersecaoRetas(d1, d2);
+          const [x, y] = this.intersectionLines(d1, d2);
           //console.log("x & y", x, y);
           this.setState(state => ({ ...state, centro: { x, y } }));
 
-          this.desenhaCircuferencia(pointsSet[0], p4, pointsSet[1]);
+          this.drawCircumference(pointsSet[0], p4, pointsSet[1]);
         }
         //TODO:
       }
     }
   }
 
-  desenhaCircuferencia(p1, p2, p3, centro) {
+  drawCircumference(p1, p2, p3, centro) {
     console.log("circuferencia", p1, p2, p3);
-    const { a, b } = this.expressaoReta(p1, p2);
-    const [ap, bp] = this.retaPerpendicular(a, b, p3.x, p3.y);
-    const [x, y] = this.intersecaoRetas({ a, b }, { a: ap, b: bp });
-    const h = this.calcularDistanceEntrePontos(p3, { x, y });
-    const base = this.calcularDistanceEntrePontos(p1, p2);
+    const { a, b } = this.straightExpression(p1, p2);
+    const [ap, bp] = this.perpendicularStraight(a, b, p3.x, p3.y);
+    const [x, y] = this.intersectionLines({ a, b }, { a: ap, b: bp });
+    const h = this.calculateDistanceBetweenPoints(p3, { x, y });
+    const base = this.calculateDistanceBetweenPoints(p1, p2);
     const area = h * base;
     const radius = Math.sqrt(area / Math.PI);
     this.setState(state => ({ ...state, radius }));
   }
 
-  calcularDistanceEntrePontos(p1, p2) {
+  calculateDistanceBetweenPoints(p1, p2) {
     return Math.sqrt(Math.pow(p2.y - p1.y, 2) + Math.pow(p2.x - p1.x, 2));
   }
 
-  retaPerpendicular(a, b, x, y) {
+  perpendicularStraight(a, b, x, y) {
     const coefAngular = -1 / a;
     const constante = y + x / a;
     return [coefAngular, constante];
   }
 
-  intersecaoRetas(d1, d2) {
+  intersectionLines(d1, d2) {
     const x = (d2.b - d1.b) / (d1.a - d2.a);
     const y = d1.a * x + d1.b;
     return [x, y];
   }
 
-  expressaoReta(p1, p2) {
+  straightExpression(p1, p2) {
     console.log("p1 & p2", p1, p2);
-    const a = this.coeficiente(p1, p2);
-    const b = this.constanteFuncao(p1.x, p1.y, a);
+    const a = this.coefficient(p1, p2);
+    const b = this.constantFunction(p1.x, p1.y, a);
     console.log("a & b", a, b);
     return { a, b };
   }
 
-  gerarQuartoPonto([p1, p2, p3]) {
+  generateFourthPoint([p1, p2, p3]) {
     const x4 = p3.x - p2.x + p1.x;
     const y4 = p3.y - p2.y + p1.y;
     return [x4, y4];
   }
 
-  constanteFuncao(x, y, c) {
+  constantFunction(x, y, c) {
     return y - c * x;
   }
 
-  coeficiente(p1, p2) {
+  coefficient(p1, p2) {
     if (p1.x !== p2.x) {
       return (p2.y - p1.y) / (p2.x - p1.x);
     } else {

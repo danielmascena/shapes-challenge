@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "../../components/Modal";
 
-const About = ({ defineModal }) => (
+const About = () => (
   <p>
     This application was developed by <strong>Daniel Mascena</strong>. His
     purpose is to use the user inputs, three choosed (clicked) points, on a{" "}
