@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Konva from "konva";
 import { Circle } from "react-konva";
 import Point from "../model/Point";
+import { returnSiblingPointIds } from "../utils/shapeUtils";
+import * as shapeService from "../services/shapeService";
 
 const PointCircle = ({
-  point: { x, y },
+  point,
   radius,
   draggable,
   fill,
@@ -13,10 +15,10 @@ const PointCircle = ({
   shadowBlur = 5,
   shadowOpacity = 0.5,
   shadowColor = "black",
-  pointsSet,
   updateCoords
 }) => {
   const [previousCoord, setPreviousCoord] = useState();
+  const { x, y, id } = point;
   let circleProperties = { x, y, radius };
   if (index !== undefined) {
     circleProperties.key = index;
@@ -29,8 +31,7 @@ const PointCircle = ({
   }
   if (typeof draggable === "boolean" && draggable) {
     const handleDragStart = event => {
-      console.log("drag starting ", x, y);
-      setPreviousCoord({ x, y });
+      setPreviousCoord(point);
       event.target.setAttrs({
         shadowOffset: {
           x: 15,
@@ -40,12 +41,35 @@ const PointCircle = ({
         scaleY: 1.1
       });
     };
-
+    const handleDragMove = event => {
+      const [previousPointId, nextPointId] = returnSiblingPointIds(id);
+      const {
+        evt: { layerX: neoX, layerY: neoY }
+      } = event;
+      /*
+      shapeService.updateParallelogram({
+        neoX,
+        neoY,
+        previousPointId,
+        nextPointId,
+        point
+      });
+      */
+    };
     const handleDragEnd = event => {
       const { x: neoX, y: neoY } = event.target._lastPos;
-      const neoPoint = new Point(neoX, neoY);
-      console.log("Drag event ended ", neoPoint, updateCoords);
+      const [prevPointId, nextPointId] = returnSiblingPointIds(id);
+      const neoPoint = new Point(neoX, neoY, id);
       updateCoords(neoPoint);
+      /*
+      shapeService.updateParallelogram({
+        neoX,
+        neoY,
+        point,
+        prevPointId,
+        nextPointId
+      });
+      */
       event.target.to({
         duration: 0.5,
         easing: Konva.Easings.ElasticEaseOut,
@@ -62,7 +86,8 @@ const PointCircle = ({
       shadowOpacity,
       shadowColor,
       onDragStart: handleDragStart,
-      onDragEnd: handleDragEnd
+      onDragEnd: handleDragEnd,
+      onDragMove: handleDragMove
     };
   }
 

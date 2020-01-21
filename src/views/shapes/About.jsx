@@ -15,8 +15,11 @@ const About = ({ defineModal }) => (
     <a href="https://reactjs.org/">ReactJS</a> UI Component library,{" "}
     <a href="https://github.com/konvajs/react-konva">React Konva</a> for an
     easily integration between React and Canvas API, and for the last,{" "}
-    <a href="https://redux.js.org/">Redux</a> for serving as a state container
-    for JavaScript apps.
+    <a href="https://redux.js.org/">Redux.js</a>,{" "}
+    <i>
+      the most popular implementation of the Flux Pattern for State Management
+    </i>
+    , for serving as a state container for JavaScript apps.
   </p>
 );
 

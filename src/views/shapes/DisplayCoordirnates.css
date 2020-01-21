@@ -4,8 +4,9 @@
   border-radius: 5px;
   margin: 0 3rem 2rem;
   box-shadow: 0 0 5px;
-  max-width: 40%;
-  margin: 4rem auto;
+  display: inline-block;
+  text-align: justify;
+  min-width: 35%;
 }
 
 h3 {

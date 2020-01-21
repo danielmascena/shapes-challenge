@@ -36,22 +36,33 @@ let Container = ({
   }, [innerHeight, innerWidth]);
   */
   return (
-    <Stage
-      width={window.innerWidth}
-      height={window.innerHeight}
-      onClick={handleClick}
-    >
-      <Layer>
-        <Text
-          text={`Please choose ${4 - count} ${
-            count < 3 ? "points" : "point"
-          } to draw a parallelogram`}
-          fontSize={15}
-          fill="white"
-        />
-        <DrawShapes {...{ points, pointsSet, circleCenter, circleRadius, dispatch }} />
-      </Layer>
-    </Stage>
+    <React.Fragment>
+      <button
+        className="shapes-btn"
+        style={{ float: "left" }}
+        onClick={() => dispatch(actionCreation.resetShapes())}
+      >
+        Reset
+      </button>
+      <Stage
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onClick={handleClick}
+      >
+        <Layer>
+          <Text
+            text={`Please choose ${4 - count} ${
+              count < 3 ? "points" : "point"
+            } to draw a parallelogram`}
+            fontSize={15}
+            fill="white"
+          />
+          <DrawShapes
+            {...{ points, pointsSet, circleCenter, circleRadius, dispatch }}
+          />
+        </Layer>
+      </Stage>
+    </React.Fragment>
   );
 };
 

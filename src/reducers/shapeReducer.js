@@ -22,7 +22,7 @@ const reducer = (state = initialState, {
         const count = state.count + 1;
         const point = new Point(payload.x, payload.y, count);
         const neoPointSet = [...state.pointsSet, point];
-       return {
+        return {
           ...state,
           count,
           /** Avoid TypeError throwed by Object.values */
@@ -32,42 +32,46 @@ const reducer = (state = initialState, {
       } else {
         return state;
       }
-    case types.UPDATING_POINT:
-      const {pos:indexForUpdate, newPoint: pointForUpdate} = payload;
-      const pointSetUpdated = [];
-      const updatedCoord = [];
-      for (let index = 0; index < state.pointsSet.length; index++) {
-        const point = state.pointsSet[index];
-        if (index === indexForUpdate) {
-          updatedCoord.push(pointForUpdate.x, pointForUpdate.y);
-          pointSetUpdated.push(pointForUpdate);
-        } else {
-          updatedCoord.push(point.x, point.y);
-          pointSetUpdated.push(point);
+      case types.UPDATING_POINT:
+        const {
+          newPoint: pointForUpdate
+        } = payload;
+        const pointSetUpdated = [];
+        const updatedCoord = [];
+        for (let index = 0; index < state.pointsSet.length; index++) {
+          const point = state.pointsSet[index];
+          if (index === pointForUpdate.id - 1) {
+            updatedCoord.push(pointForUpdate.x, pointForUpdate.y);
+            pointSetUpdated.push(pointForUpdate);
+          } else {
+            updatedCoord.push(point.x, point.y);
+            pointSetUpdated.push(point);
+          }
         }
-      }
-      return {
-        ...state,
-        points: updatedCoord,
-        pointsSet: pointSetUpdated
-      };
-    case types.SET_CIRCLE_CENTER:
-      const point = new Point(payload.x, payload.y);
-      return {
-        ...state,
-        circleCenter: point
-      }
-    case types.SET_AREA_RADIUS:
-      const {area, radius} = payload;
-      return {
-        ...state,
-        circleRadius: radius,
-        parallelogramArea: area
-      }
-    case types.RESET_SHAPES:
-      return initialState;
-    default:
-      return state;
+        return {
+          ...state,
+          points: updatedCoord,
+            pointsSet: pointSetUpdated
+        };
+      case types.SET_CIRCLE_CENTER:
+        const point = new Point(payload.x, payload.y);
+        return {
+          ...state,
+          circleCenter: point
+        }
+        case types.SET_AREA_RADIUS:
+          const {
+            area, radius
+          } = payload;
+          return {
+            ...state,
+            circleRadius: radius,
+              parallelogramArea: area
+          }
+          case types.RESET_SHAPES:
+            return initialState;
+          default:
+            return state;
   }
 };
 

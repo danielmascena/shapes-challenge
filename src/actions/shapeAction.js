@@ -1,34 +1,51 @@
 import * as types from "../constants/actionTypes";
 
 const actionCreation = {
-    insertPoint({x, y}) {
+    insertPoint({
+        x,
+        y
+    }) {
         return {
             type: types.ADDING_POINT,
-            payload: {x, y}
+            payload: {
+                x,
+                y
+            }
         }
     },
-    updatePoint(pos, newPoint) {
+    updatePoint(newPoint) {
         return {
             type: types.UPDATING_POINT,
-            payload: {pos, newPoint}
+            payload: {
+                newPoint
+            }
         }
     },
-    setCircleCenter({x, y}) {
+    setCircleCenter({
+        x,
+        y
+    }) {
         return {
             type: types.SET_CIRCLE_CENTER,
-            payload: {x, y}
+            payload: {
+                x,
+                y
+            }
         }
     },
     setAreaRadius(area, radius) {
         return {
             type: types.SET_AREA_RADIUS,
-            payload: {area, radius}
+            payload: {
+                area,
+                radius
+            }
         }
     },
-    resetShapes(){
+    resetShapes() {
         return {
             type: types.RESET_SHAPES,
-        
+
         }
     }
 }
