@@ -12,6 +12,7 @@ const Header = () => {
       </h1>
       <nav>
         <input
+          className="open-modal-btn"
           type="button"
           onClick={event => {
             modal.current.showModal();

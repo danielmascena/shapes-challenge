@@ -6,10 +6,10 @@ import Point from "../model/Point";
  * @returns {Array} fourth point and the intersection point
  */
 export function generateParallelogram(pointsSet) {
-  // infer the 4th point through the projection of the parallel lines
-  const p4 = generateFourthPoint(pointsSet);
-  const intersectionPoint = getParallelogramCenter(pointsSet, p4);
-  return [p4, intersectionPoint];
+    // infer the 4th point through the projection of the parallel lines
+    const p4 = generateFourthPoint(pointsSet);
+    const intersectionPoint = getParallelogramCenter(...pointsSet, p4);
+    return [p4, intersectionPoint];
 }
 /**
  * Find the center of parallelogram by the intersection (crossing) of his diagonals
@@ -17,15 +17,15 @@ export function generateParallelogram(pointsSet) {
  * @param {Point} p4
  * @returns {Point} the intersection point of parallelogram
  */
-export function getParallelogramCenter(pointsSet, p4) {
-  // p1 -> p3 = first diagonal
-  const d1 = straightExpression(pointsSet[0], pointsSet[2]);
-  // p2 -> p4 = second diagonal
-  const d2 = straightExpression(pointsSet[1], p4);
-  // parallelogram center
-  const [x, y] = intersectionLines(d1, d2);
-  // intersection point
-  return new Point(x, y);
+export function getParallelogramCenter(p1, p2, p3, p4) {
+    // p1 -> p3 = first diagonal
+    const d1 = straightExpression(p1, p3);
+    // p2 -> p4 = second diagonal
+    const d2 = straightExpression(p2, p4);
+    // parallelogram center
+    const [x, y] = intersectionLines(d1, d2);
+    // intersection point
+    return new Point(x, y);
 }
 
 /**
@@ -36,29 +36,29 @@ export function getParallelogramCenter(pointsSet, p4) {
  * @returns {number, number} the parallelogram area and the circle radius
  */
 export function drawCircumference(p1, p2, p3) {
-  const { a, b } = straightExpression(p1, p2);
-  const [ap, bp] = perpendicularStraight(a, b, p3.x, p3.y);
-  const [x, y] = intersectionLines(
-    {
-      a,
-      b
-    },
-    {
-      a: ap,
-      b: bp
-    }
-  );
-  const h = calculateDistanceBetweenPoints(p3, {
-    x,
-    y
-  });
-  const base = calculateDistanceBetweenPoints(p1, p2);
-  const area = h * base;
-  const radius = Math.sqrt(area / Math.PI);
-  return {
-    area,
-    radius
-  };
+    const {
+        a,
+        b
+    } = straightExpression(p1, p2);
+    const [ap, bp] = perpendicularStraight(a, b, p3.x, p3.y);
+    const [x, y] = intersectionLines({
+        a,
+        b
+    }, {
+        a: ap,
+        b: bp
+    });
+    const h = calculateDistanceBetweenPoints(p3, {
+        x,
+        y
+    });
+    const base = calculateDistanceBetweenPoints(p1, p2);
+    const area = h * base;
+    const radius = Math.sqrt(area / Math.PI);
+    return {
+        area,
+        radius
+    };
 }
 
 /**
@@ -68,7 +68,7 @@ export function drawCircumference(p1, p2, p3) {
  * @returns {number}
  */
 export function calculateDistanceBetweenPoints(p1, p2) {
-  return Math.sqrt(Math.pow(p2.y - p1.y, 2) + Math.pow(p2.x - p1.x, 2));
+    return Math.sqrt(Math.pow(p2.y - p1.y, 2) + Math.pow(p2.x - p1.x, 2));
 }
 
 /**
@@ -80,9 +80,9 @@ export function calculateDistanceBetweenPoints(p1, p2) {
  * @returns {Array}
  */
 export function perpendicularStraight(a, b, x, y) {
-  const coefAngular = -1 / a;
-  const constant = y + x / a;
-  return [coefAngular, constant];
+    const coefAngular = -1 / a;
+    const constant = y + x / a;
+    return [coefAngular, constant];
 }
 
 /**
@@ -92,9 +92,9 @@ export function perpendicularStraight(a, b, x, y) {
  * @returns {Array} coordenates of the crossing point
  */
 export function intersectionLines(d1, d2) {
-  const x = (d2.b - d1.b) / (d1.a - d2.a);
-  const y = d1.a * x + d1.b;
-  return [x, y];
+    const x = (d2.b - d1.b) / (d1.a - d2.a);
+    const y = d1.a * x + d1.b;
+    return [x, y];
 }
 
 /**
@@ -103,7 +103,7 @@ export function intersectionLines(d1, d2) {
  * @returns {number} the previous point position
  */
 export function getPrevId(id) {
-  return id === 1 ? 4 : id - 1;
+    return id === 1 ? 4 : id - 1;
 }
 
 /**
@@ -112,7 +112,7 @@ export function getPrevId(id) {
  * @returns {number} the next point position
  */
 export function getNextId(id) {
-  return id < 4 ? id + 1 : 1;
+    return id < 4 ? id + 1 : 1;
 }
 
 /**
@@ -122,12 +122,12 @@ export function getNextId(id) {
  * @returns {Object} the angular coefficient
  */
 export function straightExpression(p1, p2) {
-  const a = coefficient(p1, p2);
-  const b = constantFunction(p1.x, p1.y, a);
-  return {
-    a,
-    b
-  };
+    const a = coefficient(p1, p2);
+    const b = constantFunction(p1.x, p1.y, a);
+    return {
+        a,
+        b
+    };
 }
 
 /**
@@ -135,10 +135,10 @@ export function straightExpression(p1, p2) {
  * @param {Point[]} param0 - list of Points
  */
 export function generateFourthPoint([p1, p2, p3]) {
-  const x4 = p3.x - p2.x + p1.x;
-  const y4 = p3.y - p2.y + p1.y;
-  const fourthPoint = new Point(x4, y4, p3.id + 1);
-  return fourthPoint;
+    const x4 = p3.x - p2.x + p1.x;
+    const y4 = p3.y - p2.y + p1.y;
+    const fourthPoint = new Point(x4, y4, p3.id + 1);
+    return fourthPoint;
 }
 
 /**
@@ -149,7 +149,7 @@ export function generateFourthPoint([p1, p2, p3]) {
  * @returns {number} straight expression constant
  */
 export function constantFunction(x, y, c) {
-  return y - c * x;
+    return y - c * x;
 }
 
 /**
@@ -158,9 +158,9 @@ export function constantFunction(x, y, c) {
  * @param {Point} p2
  */
 export function coefficient(p1, p2) {
-  if (p1.x !== p2.x) {
-    return (p2.y - p1.y) / (p2.x - p1.x);
-  } else {
-    return null;
-  }
+    if (p1.x !== p2.x) {
+        return (p2.y - p1.y) / (p2.x - p1.x);
+    } else {
+        return null;
+    }
 }

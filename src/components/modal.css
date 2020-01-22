@@ -40,13 +40,13 @@ dialog::backdrop {
 }
 
 .modal-btn__close {
-    background: yellow;
-    color: blue;
+    background: #ff0;
+    color: #00f;
 }
 
 .modal-btn__close:hover {
-    background: blue;
-    color: yellow;
+    background: #00f;
+    color: #FF0;
 }
 
 @keyframes animate-shapes {

@@ -18,13 +18,22 @@ nav {
   float: right;
 }
 
-nav a {
+.open-modal-btn {
   cursor: pointer;
+  font-size: 2rem;
+  transition: 500ms;
+  /* resetting button default style */
+  background: transparent;
+  border: none;
+}
+
+.open-modal-btn:hover {
+  text-shadow: -1px -1px 1px #00f;
 }
 
 .modal-heading__text,
 .brand-title__text {
-  text-shadow: 0 0 2px blue, 0 0 2px red;
+  text-shadow: 0 0 2px #00f, 0 0 2px red;
   position: relative;
   display: inline-block;
 }
@@ -43,7 +52,7 @@ nav a {
 
 .modal-heading__text:before,
 .brand-title__text:before {
-  color: blue;
+  color: #00f;
   right: 0;
   bottom: -15px;
   transform: skewX(30deg);
@@ -51,7 +60,7 @@ nav a {
 
 .modal-heading__text:after,
 .brand-title__text:after {
-  color: yellow;
+  color: #ff0;
   border-radius: 50%;
   left: 0px;
   top: 0px;

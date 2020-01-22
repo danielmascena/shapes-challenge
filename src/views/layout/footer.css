@@ -1,6 +1,6 @@
 footer {
   text-align: center;
-  background: linear-gradient(45deg, red, blue);
+  background: linear-gradient(45deg, #f00, #00f);
   line-height: 100px;
   color: whitesmoke;
   text-shadow: 1px 1px 4px #000;

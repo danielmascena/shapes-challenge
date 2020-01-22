@@ -1,5 +1,5 @@
 .coordinates-container {
-  background: linear-gradient(blue, red, yellow);
+  background: linear-gradient(#00f, #f00, #ff0);
   padding: 0.2rem;
   border-radius: 5px;
   margin: 0 3rem 2rem;
@@ -11,7 +11,7 @@
 
 h3 {
   margin: 0.4rem;
-  color: white;
+  color: #fff;
 }
 
 .coordinates-content {
