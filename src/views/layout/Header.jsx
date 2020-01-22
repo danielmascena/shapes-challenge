@@ -1,5 +1,4 @@
 import React from "react";
-import Modal from "../../components/Modal";
 import About from "../shapes/About";
 import "./header.css";
 
@@ -12,14 +11,14 @@ const Header = () => {
         <span className="brand-title__text">Shapes</span>
       </h1>
       <nav>
-        <a
+        <input
+          type="button"
           onClick={event => {
             modal.current.showModal();
             event.preventDefault();
           }}
-        >
-          About
-        </a>
+          value="About"
+        />
       </nav>
       <aside>
         <About defineModal={setModal} />

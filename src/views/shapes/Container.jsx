@@ -39,7 +39,7 @@ let Container = ({
         style={{ float: "left" }}
         onClick={handleReset}
       >
-        Reset
+        Reset Shapes
       </button>
       <Stage
         width={window.innerWidth}

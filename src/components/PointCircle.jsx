@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Konva from "konva";
 import { Circle } from "react-konva";
-import Point from "../model/Point";
-import { returnSiblingPointIds } from "../utils/shapeUtils";
 import * as shapeService from "../services/shapeService";
 
 const PointCircle = ({
@@ -14,12 +12,11 @@ const PointCircle = ({
   index,
   shadowBlur = 5,
   shadowOpacity = 0.5,
-  shadowColor = "black",
-  updateCoords
+  shadowColor = "black"
 }) => {
-  const [previousCoord, setPreviousCoord] = useState();
-  const { x, y, id } = point;
+  const { x, y } = point;
   let circleProperties = { x, y, radius };
+
   if (index !== undefined) {
     circleProperties.key = index;
   }
@@ -31,7 +28,6 @@ const PointCircle = ({
   }
   if (typeof draggable === "boolean" && draggable) {
     const handleDragStart = event => {
-      setPreviousCoord(point);
       event.target.setAttrs({
         shadowOffset: {
           x: 15,
@@ -45,21 +41,11 @@ const PointCircle = ({
       const {
         evt: { layerX: neoX, layerY: neoY }
       } = event;
-      /*
-      shapeService.updateParallelogram({
-        neoX,
-        neoY,
-        previousPointId,
-        nextPointId,
-        point
-      });
-      */
-    };
-    const handleDragEnd = event => {
-      const { x: neoX, y: neoY } = event.target._lastPos;
 
       shapeService.updateParallelogram(neoX, neoY, point);
-      //updateCoords(neoPoint);
+    };
+    const handleDragEnd = event => {
+      //const { x: neoX, y: neoY } = event.target._lastPos;
 
       event.target.to({
         duration: 0.5,

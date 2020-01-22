@@ -10,6 +10,12 @@ export const initialState = {
   parallelogramArea: 0
 };
 
+/**
+ * 
+ * @param {object} state 
+ * @param {object} action
+ * @returns {object} new state  
+ */
 const reducer = (state = initialState, {
   type,
   payload
