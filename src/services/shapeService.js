@@ -2,46 +2,60 @@ import {
     store as shapeStore
 } from "../App.jsx";
 import {
-    generateParallelogram,
+    generateFourthPoint,
+    straightExpression,
+    intersectionLines,
+    getPrevId,
     coefficient,
-    constantFunction
+    constantFunction,
+    getNextId
 } from "../utils/shapeUtils";
 import actionCreation from "../actions/shapeAction";
+import Point from "../model/Point.js";
 
 /**
  * 
  * @param {neoX, neoY, previousPointId, nextPointId, point} newCoords 
  */
-export function updateParallelogram({
-    neoX: x,
-    neoY: y,
-    point,
-    prevPointId,
-    nextPointId,
-}) {
+export function updateParallelogram(
+    neoX,
+    neoY,
+    prevPointPosition
+) {
+
+    const pointNewPosition = new Point(neoX, neoY, prevPointPosition.id);
+    const upperPointId = getPrevId(prevPointPosition.id);
+    const beneathPointId = getNextId(prevPointPosition.id);
+
+    shapeStore.dispatch(actionCreation.updatePoint(pointNewPosition));
+    updateVertix(upperPointId, pointNewPosition, prevPointPosition, false);
+    updateVertix(beneathPointId, pointNewPosition, prevPointPosition, true);
+
+}
+
+export function updateVertix(thirdPointId, pointNewPosition, prevPointPosition, inverse) {
+    // Getting the previous id to build a virtual parallelogram
+
     const state = shapeStore.getState();
-    const dispatch = shapeStore.dispatch;
-    const prevSiblingId = prevPointId - 1;
-    const nextSiblingId = nextPointId - 1;
-    const prevPoint = state.pointsSet[prevSiblingId];
-    const nextPoint = state.pointsSet[nextSiblingId];
-    const [newPrevCoord, pontoPrevIntersecao] = generateParallelogram([{
-        x,
-        y
-    }, point, prevPoint]);
-    const [newNextCoord, intersectionNextPoint] = generateParallelogram([{
-        x,
-        y
-    }, point, nextPoint]);
-    newPrevCoord.id = prevSiblingId;
-    newNextCoord.id = nextSiblingId;
-    console.log("updating parallelogram ", );
-    console.table(x, y, point, prevSiblingId, prevPoint, newPrevCoord);
-    dispatch(actionCreation.updatePoint(newPrevCoord));
-    dispatch(actionCreation.updatePoint(newNextCoord));
+    const thirdUpperPoint = state.pointsSet[thirdPointId - 1];
+
+    const upperFourthPoint = generateFourthPoint([pointNewPosition, prevPointPosition, thirdUpperPoint]);
+    const upperStraightOne = straightExpression(pointNewPosition, upperFourthPoint);
+    let fourthId;
+    if (inverse) {
+        fourthId = getNextId(thirdUpperPoint.id) - 1;
+    } else {
+        fourthId = getPrevId(thirdUpperPoint.id) - 1;
+    }
+    const fourthUpperPoint = state.pointsSet[fourthId];
+    const upperStraigthTwo = straightExpression(thirdUpperPoint, fourthUpperPoint);
+    const newThirdPoint = new Point(...intersectionLines(upperStraightOne, upperStraigthTwo));
+    newThirdPoint.id = thirdUpperPoint.id;
+    shapeStore.dispatch(actionCreation.updatePoint(newThirdPoint));
 }
 
 export function validateParallelogram(pointsSet) {
+
     const [p1, p2] = pointsSet;
     let result = coefficient(p1, p2);
     if (result === null) {

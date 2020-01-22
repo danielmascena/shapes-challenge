@@ -42,7 +42,6 @@ const PointCircle = ({
       });
     };
     const handleDragMove = event => {
-      const [previousPointId, nextPointId] = returnSiblingPointIds(id);
       const {
         evt: { layerX: neoX, layerY: neoY }
       } = event;
@@ -58,18 +57,10 @@ const PointCircle = ({
     };
     const handleDragEnd = event => {
       const { x: neoX, y: neoY } = event.target._lastPos;
-      const [prevPointId, nextPointId] = returnSiblingPointIds(id);
-      const neoPoint = new Point(neoX, neoY, id);
-      updateCoords(neoPoint);
-      /*
-      shapeService.updateParallelogram({
-        neoX,
-        neoY,
-        point,
-        prevPointId,
-        nextPointId
-      });
-      */
+
+      shapeService.updateParallelogram(neoX, neoY, point);
+      //updateCoords(neoPoint);
+
       event.target.to({
         duration: 0.5,
         easing: Konva.Easings.ElasticEaseOut,

@@ -22,7 +22,7 @@ let Container = ({
   const handleClick = event => {
     dispatch(actionCreation.insertPoint(event.currentTarget.pointerPos));
   };
-
+  const handleReset = () => dispatch(actionCreation.resetShapes());
   /*
   const {innerHeight, innerWidth} = window;
   const [viewportWidth, setViewportWidth] = useState(innerWidth);
@@ -37,7 +37,7 @@ let Container = ({
       <button
         className="shapes-btn"
         style={{ float: "left" }}
-        onClick={() => dispatch(actionCreation.resetShapes())}
+        onClick={handleReset}
       >
         Reset
       </button>

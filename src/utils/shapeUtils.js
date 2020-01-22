@@ -1,6 +1,7 @@
 import Point from "../model/Point";
 
 export function generateParallelogram(pointsSet) {
+    //TODO isolar comportamentos
     // inferir o 4º ponto atraves da projeção das retas paralelas
     const p4 = generateFourthPoint(pointsSet);
     //encontrar o centro do paralelograma; cruzamento (interseção) das diagonais
@@ -56,8 +57,11 @@ export function intersectionLines(d1, d2) {
     return [x, y];
 }
 
-export function returnSiblingPointIds(id) {
-    return [id === 1 ? 4 : id - 1, id < 4 ? id + 1 : 1];
+export function getPrevId(id) {
+    return id === 1 ? 4 : id - 1;
+}
+export function getNextId(id) {
+    return id < 4 ? id + 1 : 1;
 }
 
 export function straightExpression(p1, p2) {
@@ -72,7 +76,7 @@ export function straightExpression(p1, p2) {
 export function generateFourthPoint([p1, p2, p3]) {
     const x4 = p3.x - p2.x + p1.x;
     const y4 = p3.y - p2.y + p1.y;
-    const fourthPoint = new Point(x4, y4);
+    const fourthPoint = new Point(x4, y4, p3.id + 1);
     return fourthPoint;
 }
 
